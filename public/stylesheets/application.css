@@ -78,7 +78,30 @@ a {
   list-style: disc;
 }
 
+a.tab {
+  float: left;
+  display: block;
+  padding: 0.3em;
+  margin: 0;
+  text-decoration: none;
+  background: #fff;
+  color: black;
+  border: solid 1px black;
+}
+
+a.new.message {
+  float: left;
+  display: block;
+  padding: 0.3em;
+  margin: 0;
+  text-decoration: none;
+  background: #cfc;
+  color: #050;
+  border: solid 1px #050;
+}
+
 div.message {
+  clear: both;
   margin: 3em;
   padding: 2em;
   margin: 2em 0;
