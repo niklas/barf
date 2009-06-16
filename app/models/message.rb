@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  default_scope :order => 'created_at DESC'
   Lifespans = [
     ['5 Minuten',  5.minutes],
     ['15 Minuten', 15.minutes],
@@ -13,12 +14,27 @@ class Message < ActiveRecord::Base
     ['3 Monate',    3.months],
     ['ein halbes Jahr', 6.months]
   ]
+  DefaultLifespan = 5.days
   validates_length_of :body, :in => 5..200
-  def due_at
-    Time.now + lifespan
+
+  def lifespan=(new_lifespan)
+    due_at = Time.now + new_lifespan
   end
 
-  def lifespan
-    read_attribute('lifespan') || 5.days
+  def due_at
+    read_attribute('due_at') || Time.now + DefaultLifespan
   end
+
+  named_scope :skip, lambda {|offset|
+    {:offset => offset}
+  }
+  named_scope :limit, lambda {|limit|
+    {:limit => limit}
+  }
+  named_scope :displayed, lambda {
+    { :conditions => ['due_at < ?', Time.now] }
+  }
+  named_scope :due, lambda {
+    { :conditions => ['due_at > ?', Time.now] }
+  }
 end

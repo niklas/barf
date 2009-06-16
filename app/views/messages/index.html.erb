@@ -1,6 +1,9 @@
-<h1>Messages</h1>
+<h1>Recent Messages</h1>
 
-
-<%= render :partial => @messages %>
+<%= render :partial => @recent_messages %>
 
 <%= link_to 'New message', new_message_path %>
+<h1>Old Messages</h1>
+
+<%= render :partial => @old_messages %>
+

@@ -2,7 +2,8 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.xml
   def index
-    @messages = Message.all
+    @recent_messages = Message.limit(5)
+    @old_messages = Message.skip(5).limit(23)
 
     respond_to do |format|
       format.html # index.html.erb
