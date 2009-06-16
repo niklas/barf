@@ -1,5 +1,5 @@
 body {
-  background-color: #4B7399;
+  background: url(../images/background.jpg) white repeat-x;
   font-family: Verdana, Helvetica, Arial;
   font-size: 14px;
 }
@@ -21,9 +21,7 @@ a {
 #container {
   width: 75%;
   margin: 0 auto;
-  background-color: #FFF;
   padding: 20px 40px;
-  border: solid 1px black;
   margin-top: 20px;
 }
 
@@ -78,4 +76,25 @@ a {
 #errorExplanation ul li {
   font-size: 12px;
   list-style: disc;
+}
+
+div.message {
+  margin: 3em;
+  padding: 2em;
+  margin: 2em 0;
+  padding: 1em;
+  background-color: #FFF;
+  border: solid 1px black;
+  position: relative;
+}
+
+div.message div.meta {
+  background:black none repeat scroll 0 0;
+  color:white;
+  font-size:80%;
+  left:-1px;
+  padding:0.5em;
+  position:absolute;
+  top:-1.5em;
+  z-index:3;
 }
