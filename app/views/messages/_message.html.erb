@@ -1,8 +1,10 @@
-<% div_for message do %>
+<% div_for message, :class => message.state do %>
   <div class="meta">
     <span class="author"><%=h message.author %></span>
     <span class="time"><%=time_ago_in_words message.created_at %> ago</span>
-    <span class="due">due in <%=distance_of_time_in_words message.due_at, Time.now %></span>
+    <% unless message.due? %>
+      <span class="due">due in <%=distance_of_time_in_words message.due_at, Time.now %></span>
+    <% end %>
   </div>
   <p><%=h message.body %></p>
 <% end %>

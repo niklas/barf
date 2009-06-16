@@ -14,15 +14,27 @@ class Message < ActiveRecord::Base
     ['3 Monate',    3.months],
     ['ein halbes Jahr', 6.months]
   ]
-  DefaultLifespan = 5.days
+  DefaultLifespan = 1.day
   validates_length_of :body, :in => 5..200
 
   def lifespan=(new_lifespan)
-    due_at = Time.now + new_lifespan
+    self.due_at = Time.zone.now + new_lifespan.to_i
+  end
+
+  def lifespan
+    due_at - Time.zone.now
   end
 
   def due_at
-    read_attribute('due_at') || Time.now + DefaultLifespan
+    read_attribute('due_at') || Time.zone.now + DefaultLifespan
+  end
+
+  def due?
+    due_at < Time.zone.now
+  end
+
+  def state
+    due? ? 'due' : 'displayed'
   end
 
   named_scope :skip, lambda {|offset|
@@ -32,9 +44,9 @@ class Message < ActiveRecord::Base
     {:limit => limit}
   }
   named_scope :displayed, lambda {
-    { :conditions => ['due_at < ?', Time.now] }
+    { :conditions => ['? < due_at', Time.zone.now] }
   }
   named_scope :due, lambda {
-    { :conditions => ['due_at > ?', Time.now] }
+    { :conditions => ['due_at < ?', Time.zone.now] }
   }
 end
