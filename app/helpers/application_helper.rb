@@ -6,7 +6,9 @@ module ApplicationHelper
     opts[:class] += " list #{things.first.class.table_name}"
     returning '' do |html|
       if title = opts.delete(:title)
-        html << tab(title)
+        tab(title)
+        opts[:class] += ' tab'
+        opts[:id] = title.underscore.downcase
       end
       html << content_tag(:div, render(:partial => things), opts)
     end
@@ -15,6 +17,5 @@ module ApplicationHelper
   def tab(title, opts={})
     name = title.underscore.downcase
     content_for(:tabs) { content_tag(:a, title, opts.merge(:href => "##{name}", :class => 'tab')) }
-    content_tag(:h1, title, opts.merge(:id => name, :class => 'tab'))
   end
 end

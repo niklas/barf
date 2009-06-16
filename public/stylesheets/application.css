@@ -100,6 +100,10 @@ a.new.message {
   border: solid 1px #050;
 }
 
+div.tab.messages {
+  margin-top: 6em;
+}
+
 div.message {
   clear: both;
   margin: 3em;

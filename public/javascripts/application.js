@@ -4,8 +4,9 @@
 $(document).ready(function() {
   $('a.tab').click( function() {
     console.debug("clicked", this.hash);
-    $('h1.tab + div').hide();
-    $( this.hash + ' + div').show();
+    $('div.tab').hide();
+    $( 'div' + this.hash).show();
+    return false;
   });
   $('a.tab:first').click();
 });
