@@ -11,3 +11,4 @@ db/*.sql
 *swp
 public/system/photos
 public/territories
+*.swp
