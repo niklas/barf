@@ -148,19 +148,19 @@ module LCD
   end
 end
 
-d = LCD::Jarltech.new('/dev/ttyUSB0')
-d.clear!
-d.write_raw "\x1bGZ"
-d.next_line
-d.write_with_delay("Hello Asses!")
-d.next_line
-d.write_with_delay("Hello Titties!")
-d.next_line
-d.write_with_delay("(.)(.)", 0.2)
-
-30.times do |b|
-  sleep 0.1
-end
+#d = LCD::Jarltech.new('/dev/ttyUSB0')
+#d.clear!
+#d.write_raw "\x1bGZ"
+#d.next_line
+#d.write_with_delay("Hello Asses!")
+#d.next_line
+#d.write_with_delay("Hello Titties!")
+#d.next_line
+#d.write_with_delay("(.)(.)", 0.2)
+#
+#30.times do |b|
+#  sleep 0.1
+#end
 # letzte 5 vollendete torrents
 # df
 # transferrate

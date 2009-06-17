@@ -37,6 +37,10 @@ class Message < ActiveRecord::Base
     due? ? 'due' : 'displayed'
   end
 
+  def full_text
+    [author, text].compact.join(' ')
+  end
+
   named_scope :skip, lambda {|offset|
     {:offset => offset}
   }
