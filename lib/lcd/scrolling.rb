@@ -6,6 +6,7 @@ module LCD
       start_scrolling options
       if options[:wait]
         sleep 0.1 * text.length
+        stop_scrolling
       end
     end
 
@@ -31,6 +32,13 @@ module LCD
       select_direction options[:direction]
       select_speed     options[:speed]
       select_block     options[:block]
+    end
+
+    def stop_scrolling(options={})
+      options.reverse_merge!({ :line => 0, })
+      esc
+      write_raw "\037" # %
+      select_line      options[:line]
     end
 
     def select_direction(dir = :left)
