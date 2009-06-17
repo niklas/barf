@@ -10,7 +10,6 @@ module LCD
       end
     end
 
-    private
     def define_scroll_message(text, block=1)
       esc
       write_raw "\040"
