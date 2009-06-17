@@ -1,15 +1,13 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "barf"
+set :scm, :git
+set :repository,  "git://github.com/niklas/barf.git"
+set :git_enable_submodules,1
+set :local_repository, "."
+set :branch, 'master'
 
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
+set :deploy_to, "/usr/lib/cgi-bin/#{application}"
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-
-role :app, "your app-server here"
-role :web, "your web-server here"
-role :db,  "your db-server here", :primary => true
+single_target = ENV['TARGET'] || "schnurr.local"
+role :app, single_target
+role :web, single_target
+role :db,  single_target, :primary => true
