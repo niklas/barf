@@ -6,3 +6,5 @@ class Fixnum
   end
 end
 
+module LCD
+end
