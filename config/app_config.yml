@@ -1,8 +1,11 @@
 development:
   domain: localhost:3000
+  lcd_device: /dev/null
 
 test:
   domain: test.host
+  lcd_device: /dev/null
 
 production:
   domain: example.com
+  lcd_device: /dev/tty.usb0
