@@ -3,8 +3,9 @@
 
 $(document).ready(function() {
   $('a.tab').click( function() {
-    console.debug("clicked", this.hash);
     $('div.tab').hide();
+    $('a.tab').removeClass('selected');
+    $(this).addClass('selected');
     $( 'div' + this.hash).show();
     return false;
   });

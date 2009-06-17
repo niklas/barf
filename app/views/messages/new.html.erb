@@ -4,19 +4,19 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :author, 'Your Name (optional)' %><br />
+    <%= f.label :author, 'Dein Name (nich nötig)' %><br />
     <%= f.text_field :author %>
   </p>
   <p>
     <%= f.label :body, 'Text' %><br />
-    <%= f.text_field :body %>
+    <%= f.text_field :body, :size => 70 %>
   </p>
   <p>
-    <%= f.label :lifespan, 'Lebenserwartung' %><br />
+    <%= f.label :lifespan, 'Anzeigedauer' %><br />
     <%= f.collection_select :lifespan, Message::Lifespans, :last, :first %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit t(:ok), :class => 'submit' %>
   </p>
 <% end %>
 

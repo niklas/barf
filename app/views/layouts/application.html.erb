@@ -15,7 +15,7 @@
 
         <div id="tabs">
           <%= yield :tabs %>
-          <%= link_to 'Neu', new_message_path, :class => 'new message' %>
+          <%= link_to t(:new), new_message_path, :class => 'new message' %>
         </div>
       
       <%- if show_title? -%>

@@ -109,6 +109,10 @@ de:
       two_words_connector: " und "
       last_word_connector: " und "
 
+  back: Zurück
+  ok: OK
+  new: Neu
+
   activerecord:
     errors:
       template:
