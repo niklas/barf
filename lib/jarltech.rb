@@ -7,7 +7,76 @@ class Fixnum
 end
 
 module LCD
+  module Types
+    def write_val(val)
+      write_raw (val+48).to_hex
+    end
+  end
+
+  module Scrolling
+    def scroll(text, options = {})
+      options[:block] = block = 1
+      define_scroll_message text, block
+      start_scrolling options
+      if options[:wait]
+        sleep 0.1 * text.length
+      end
+    end
+
+    private
+    def define_scroll_message(text, block=1)
+      esc
+      write_raw "\040"
+      write_raw text
+      end_message
+    end
+
+    def start_scrolling(options={})
+      options.reverse_merge!({
+        :line => 0,
+        :direction => :left,
+        :speed => 5,
+        :block => 1
+      })
+      esc
+      write_raw "\041"
+      select_line      options[:line]
+      select_direction options[:direction]
+      select_speed     options[:speed]
+      select_block     options[:block]
+    end
+
+    def select_direction(dir = :left)
+      val = case dir
+            when :left then 1
+            when :right then 0
+            else
+              raise ArgumentError, "wrong direction: #{dir}"
+            end
+      write_raw (val+48).to_hex
+    end
+
+    def select_speed(speed=5)
+      validate speed, 0..16
+      write_val speed
+    end
+
+    def select_block(block=1)
+      validate block, 1..8
+      write_val block
+    end
+
+  end
+
+  module Validation
+    def validate(val, accepted)
+      raise ArgumentError, "wrong argument #{val}, accepts #{accepted}" unless val === accepted
+    end
+  end
   class Jarltech
+    include Types
+    include Scrolling
+    include Validation
     def initialize(dev='/dev/tty.usb0')
       @device = dev
       @baud = 9600
@@ -129,14 +198,14 @@ module LCD
       raise "brilliance to low" if brilliance < 0
       raise "rate to high" if rate > 255
       raise "rate to low" if rate < 0
-      d.write_raw "\x1b0#{(brilliance+48).to_hex}#{rate.to_hex}"
+      write_raw "\x1b0#{(brilliance+48).to_hex}#{rate.to_hex}"
       @brilliance = brilliance
     end
 
     def brilliance=(new_brilliance)
       raise "brilliance to high" if new_brilliance > 32
       raise "brilliance to low" if new_brilliance < 0
-      d.write_raw "\x1bG#{(new_brilliance+48).to_hex}"
+      write_raw "\x1bG#{(new_brilliance+48).to_hex}"
       @brilliance = new_brilliance
     end
 
@@ -145,7 +214,22 @@ module LCD
       @serial.print data
     end
 
+    def esc
+      write_raw "\e"
+    end
+
+    def end_message
+      write_raw "\010\013"
+    end
+
+    def select_line(line)
+      validate line, 0..1
+      write_val line
+    end
+
+
   end
+
 end
 
 #d = LCD::Jarltech.new('/dev/ttyUSB0')

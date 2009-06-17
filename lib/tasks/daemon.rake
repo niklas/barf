@@ -10,7 +10,7 @@ namespace :lcd do
         messages.each do |message|
           lcd.clear!
           lcd.home
-          lcd.write_with_delay message.full_text
+          lcd.scroll message.body, :line => 1, :wait => true
         end
       end
     end
