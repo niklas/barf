@@ -78,7 +78,11 @@ a {
   list-style: disc;
 }
 
-a.tab {
+h1.title {
+  float: right;
+}
+
+div#tabs a {
   float: left;
   display: block;
   padding: 0.3em;
@@ -89,7 +93,11 @@ a.tab {
   border: solid 1px black;
 }
 
-a.new.message {
+div#tabs a.selected {
+  font-weight: bold;
+}
+
+div#tabs a.new.message {
   float: left;
   display: block;
   padding: 0.3em;
@@ -100,11 +108,11 @@ a.new.message {
   border: solid 1px #050;
 }
 
-div.tab.messages {
+div.tab.messages, form {
   margin-top: 6em;
 }
 
-div.message {
+div.message, form {
   clear: both;
   margin: 3em;
   padding: 2em;
@@ -124,4 +132,8 @@ div.message div.meta {
   position:absolute;
   top:-1.5em;
   z-index:3;
+}
+
+input.submit {
+  float: right;
 }
