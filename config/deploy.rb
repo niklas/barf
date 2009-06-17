@@ -22,4 +22,8 @@ namespace :deploy do
     run "rm -f #{current_release}/config/app_config.yml"
     run "ln -fs #{config_dir}/app_config.yml #{current_release}/config/app_config.yml"
   end
+
+  task :restart do
+    run "touch #{current_release}/tmp/restart.txt"
+  end
 end
