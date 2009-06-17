@@ -19,6 +19,7 @@ namespace :deploy do
     config_dir = "#{deploy_to}/shared/config"
     run "mkdir -p #{config_dir}"
     run "ln -fs #{config_dir}/database.yml #{current_release}/config/database.yml"
+    run "rm -f #{current_release}/config/app_config.yml"
     run "ln -fs #{config_dir}/app_config.yml #{current_release}/config/app_config.yml"
   end
 end
