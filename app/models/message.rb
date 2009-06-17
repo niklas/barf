@@ -38,7 +38,7 @@ class Message < ActiveRecord::Base
   end
 
   def full_text
-    [author, body].compact.join(': ')
+    [author, body].reject(&:blank?).join(': ')
   end
 
   named_scope :skip, lambda {|offset|
