@@ -1,7 +1,7 @@
 namespace :lcd do
   namespace :daemon do
     desc "Start the LCD daemon"
-    task :start => :enviroment do
+    task :start => :environment do
       require 'jarltech'
       lcd = LCD::Jarltech.new APP_CONFIG[:lcd_device]
       lcd.wrap = true
