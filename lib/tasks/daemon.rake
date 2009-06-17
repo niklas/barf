@@ -11,6 +11,7 @@ namespace :lcd do
           lcd.clear!
           lcd.home
           lcd.scroll message.body, :line => 1, :wait => true
+          sleep 5
         end
       end
     end
