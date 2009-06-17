@@ -1,4 +1,4 @@
-require 'serialport.so'
+require 'serialport'
 
 class Fixnum
   def to_hex
