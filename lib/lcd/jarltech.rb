@@ -33,7 +33,8 @@ module LCD
     end
 
     def clear!
-      write_raw "\x1b:"
+      esc
+      write_raw ':'
     end
 
     def flush!
@@ -142,11 +143,11 @@ module LCD
     end
 
     def esc
-      write_raw "\e"
+      write_raw "\x1b"
     end
 
     def end_message
-      write_raw "\010\013"
+      write_raw "\r"
     end
 
     def select_line(line)

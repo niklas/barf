@@ -12,7 +12,7 @@ module LCD
 
     def define_scroll_message(text, block=1)
       esc
-      write_raw "\040"
+      write_raw '('
       select_block block
       write_raw text
       end_message
@@ -26,7 +26,7 @@ module LCD
         :block => 1
       })
       esc
-      write_raw "\041"
+      write_raw ')'
       select_line      options[:line]
       select_direction options[:direction]
       select_speed     options[:speed]
@@ -36,7 +36,7 @@ module LCD
     def stop_scrolling(options={})
       options.reverse_merge!({ :line => 0, })
       esc
-      write_raw "\037" # %
+      write_raw '%'
       select_line      options[:line]
     end
 
@@ -47,7 +47,7 @@ module LCD
             else
               raise ArgumentError, "wrong direction: #{dir}"
             end
-      write_raw (val+48).to_hex
+      write_val val
     end
 
     def select_speed(speed=5)
