@@ -1,11 +1,11 @@
 module LCD
   module Scrolling
     def scroll(text, options = {})
-      options[:block] = block = 1
+      options[:block] = block = options[:line] + 1
       define_scroll_message text, block
       start_scrolling options
       if options[:wait]
-        sleep 0.1 * text.length
+        sleep text.length
         stop_scrolling
       end
     end
