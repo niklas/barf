@@ -6,12 +6,16 @@ namespace :lcd do
       lcd.wrap = true
       while true
         messages = Message.displayed
-        messages.each do |message|
-          lcd.clear!
-          lcd.home
-          lcd.write_with_delay message.author, 0.15
-          lcd.scroll message.body, :line => 1, :wait => true, :speed => 5
-          sleep 5
+        if messages.empty?
+          sleep 15
+        else
+          messages.each do |message|
+            lcd.clear!
+            lcd.home
+            lcd.write_with_delay message.author, 0.15
+            lcd.scroll message.body, :line => 1, :wait => true, :speed => 5
+            sleep 5
+          end
         end
       end
     end
