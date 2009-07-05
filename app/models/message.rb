@@ -5,12 +5,17 @@ class Message < ActiveRecord::Base
     ['15 Minuten', 15.minutes],
     ['1 Stunde',   1.hour],
     ['3 Stunden',  3.hours],
+    ['6 Stunden',  6.hours],
     ['12 Stunden', 12.hours],
     ['23 Stunden', 23.hours],
     ['1 Tag',       1.day],
+    ['2 Tage',      2.days],
+    ['3 Tage',      3.days],
     ['5 Tage',      5.days],
     ['1 Woche',     1.week],
+    ['2 Wochen',    1.weeks],
     ['1 Monat',     1.month],
+    ['6 Wochen',    6.weeks],
     ['3 Monate',    3.months],
     ['ein halbes Jahr', 6.months]
   ]
