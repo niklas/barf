@@ -41,6 +41,14 @@ class Message < ActiveRecord::Base
     [author, body].reject(&:blank?).join(': ')
   end
 
+  def brightness
+    if due?
+      0
+    else
+      brightness_by_age
+    end
+  end
+
   named_scope :skip, lambda {|offset|
     {:offset => offset}
   }
@@ -53,4 +61,9 @@ class Message < ActiveRecord::Base
   named_scope :due, lambda {
     { :conditions => ['due_at < ?', Time.zone.now] }
   }
+
+  private
+  def brightness_by_age
+    32 * (due_at - Time.zone.now) / (due_at - updated_at)
+  end
 end
